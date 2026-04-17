@@ -78,20 +78,42 @@ function nettoyerTTS(texte: string): string {
 // sur des chiffres isolés ni sur des expressions de temps (9h, 14h30, etc.).
 function belgiciserNombres(texte: string): string {
   // Étape 1 — Protège les expressions de temps (7h, 9h00, 14h30…)
-  // pour qu'elles ne soient jamais touchées par les remplacements suivants.
   const times: string[] = []
   let t = texte.replace(/\b\d{1,2}h\d{0,2}\b/gi, m => {
     times.push(m)
     return `\x00T${times.length - 1}\x00`
   })
 
-  // Étape 2 — Septante (70–79)
-  // 70 : "soixante-dix" (jamais de "et" pour 70 en français standard)
+  // Étape 2 — Chiffres isolés 70-79 et 90-99 (Mistral écrit souvent les chiffres arabes)
+  // (?<!\d) et (?!\d) évitent de toucher "071", "1970", etc.
+  t = t
+    .replace(/(?<!\d)79(?!\d)/g, 'septante-neuf')
+    .replace(/(?<!\d)78(?!\d)/g, 'septante-huit')
+    .replace(/(?<!\d)77(?!\d)/g, 'septante-sept')
+    .replace(/(?<!\d)76(?!\d)/g, 'septante-six')
+    .replace(/(?<!\d)75(?!\d)/g, 'septante-cinq')
+    .replace(/(?<!\d)74(?!\d)/g, 'septante-quatre')
+    .replace(/(?<!\d)73(?!\d)/g, 'septante-trois')
+    .replace(/(?<!\d)72(?!\d)/g, 'septante-deux')
+    .replace(/(?<!\d)71(?!\d)/g, 'septante un')
+    .replace(/(?<!\d)70(?!\d)/g, 'septante')
+    .replace(/(?<!\d)99(?!\d)/g, 'nonante-neuf')
+    .replace(/(?<!\d)98(?!\d)/g, 'nonante-huit')
+    .replace(/(?<!\d)97(?!\d)/g, 'nonante-sept')
+    .replace(/(?<!\d)96(?!\d)/g, 'nonante-six')
+    .replace(/(?<!\d)95(?!\d)/g, 'nonante-cinq')
+    .replace(/(?<!\d)94(?!\d)/g, 'nonante-quatre')
+    .replace(/(?<!\d)93(?!\d)/g, 'nonante-trois')
+    .replace(/(?<!\d)92(?!\d)/g, 'nonante-deux')
+    .replace(/(?<!\d)91(?!\d)/g, 'nonante un')
+    .replace(/(?<!\d)90(?!\d)/g, 'nonante')
+
+  // Étape 3 — Mots écrits en toutes lettres (soixante-dix, quatre-vingt-dix…)
+  // "septante-et-un" avec tirets perturbe ElevenLabs → "septante un" (espace seul)
   t = t
     .replace(/\bsoixante[\s-]dix\b/gi,               'septante')
-    // 71 : "soixante et onze" (avec "et") OU "soixante-onze" (sans "et", variante LLM)
-    .replace(/\bsoixante[\s-]et[\s-]onze\b/gi,       'septante-et-un')
-    .replace(/\bsoixante[\s-]onze\b/gi,              'septante-et-un')
+    .replace(/\bsoixante[\s-]et[\s-]onze\b/gi,       'septante un')
+    .replace(/\bsoixante[\s-]onze\b/gi,              'septante un')
     .replace(/\bsoixante[\s-]douze\b/gi,             'septante-deux')
     .replace(/\bsoixante[\s-]treize\b/gi,            'septante-trois')
     .replace(/\bsoixante[\s-]quatorze\b/gi,          'septante-quatre')
@@ -100,11 +122,8 @@ function belgiciserNombres(texte: string): string {
     .replace(/\bsoixante[\s-]dix[\s-]sept\b/gi,      'septante-sept')
     .replace(/\bsoixante[\s-]dix[\s-]huit\b/gi,      'septante-huit')
     .replace(/\bsoixante[\s-]dix[\s-]neuf\b/gi,      'septante-neuf')
-    // Étape 3 — Nonante (90–99)
-    // 90 : "quatre-vingt-dix" (sans "et")
     .replace(/\bquatre[\s-]vingt[\s-]dix\b/gi,       'nonante')
-    // 91 : "quatre-vingt-onze" (sans "et" — contrairement à 71, 91 n'a jamais de "et")
-    .replace(/\bquatre[\s-]vingt[\s-](?:et[\s-])?onze\b/gi, 'nonante-et-un')
+    .replace(/\bquatre[\s-]vingt[\s-](?:et[\s-])?onze\b/gi, 'nonante un')
     .replace(/\bquatre[\s-]vingt[\s-]douze\b/gi,     'nonante-deux')
     .replace(/\bquatre[\s-]vingt[\s-]treize\b/gi,    'nonante-trois')
     .replace(/\bquatre[\s-]vingt[\s-]quatorze\b/gi,  'nonante-quatre')
