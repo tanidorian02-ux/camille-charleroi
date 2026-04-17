@@ -63,6 +63,8 @@ function nettoyerTTS(texte: string): string {
     .replace(/^[-•–]\s+/gm, '')
     .replace(/`[^`]+`/g, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    // URLs : charleroi.be → "charleroi point be", rca-charleroi.be → "rca-charleroi point be"
+    .replace(/\b([\w-]+)\.(be|com|org|net|eu|gouv|wallonie)\b/gi, '$1 point $2')
     // Numéros de téléphone belges : 071 86 00 00 / 0800 24 063 / +32 71 86 00 00
     .replace(/(?:\+32\s?)?(?:0\d{1,3})(?:[\s./]\d{2,3}){2,4}/g, m => formatNumeroTelephone(m))
     .replace(/\s+/g, ' ')
