@@ -1,0 +1,34 @@
+[
+  {
+    "id": "C001",
+    "prenom": "Jean",
+    "nom": "Dupont",
+    "date_naissance": "15/03/1985",
+    "adresse": "Rue de la Montagne 12, 6000 Charleroi",
+    "commune_naissance": "Charleroi"
+  },
+  {
+    "id": "C002",
+    "prenom": "Marie",
+    "nom": "Martin",
+    "date_naissance": "22/07/1990",
+    "adresse": "Avenue Mascaux 45, 6001 Marcinelle",
+    "commune_naissance": "Marcinelle"
+  },
+  {
+    "id": "C003",
+    "prenom": "Ahmed",
+    "nom": "Benali",
+    "date_naissance": "08/11/1978",
+    "adresse": "Boulevard Tirou 89, 6000 Charleroi",
+    "commune_naissance": "Charleroi"
+  },
+  {
+    "id": "C004",
+    "prenom": "Sophie",
+    "nom": "Leconte",
+    "date_naissance": "30/01/2000",
+    "adresse": "Rue des Champs 5, 6041 Gosselies",
+    "commune_naissance": "Gosselies"
+  }
+]

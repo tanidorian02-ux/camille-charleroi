@@ -1,0 +1,71 @@
+graph TD
+
+    subgraph NAVIGATEUR ["NAVIGATEUR (Client)"]
+        SR["Web Speech API\nSpeechRecognition\ninterimResults = true"]
+        CB["ChatBot.tsx\n──────────────\nhistoryRef  (6 tours)\ncacheRef    (30 entrées)\nspeakResolveRef\ntypeTimerRef"]
+        TW["Typewriter\ncalibré sur audio.duration"]
+        AUDIO["HTMLAudioElement\nautoplay / barge-in"]
+        GHOST["Ghost bubble\n(texte interim)"]
+    end
+
+    subgraph NEXTJS ["SERVEUR Next.js (App Router)"]
+        CHAT["/api/chat\nroute.ts"]
+        SPEAK["/api/speak\nroute.ts"]
+        NISS["/api/verifier-niss\nroute.ts"]
+        KB["KNOWLEDGE_BASE\n~3 KB injecté\ndans system prompt"]
+        HAB["data/habitants.json\nSHA-256 NISS hash\n(RGPD-compliant)"]
+        ENV[".env.local\nAPI keys\nVoice IDs\nSite URL"]
+    end
+
+    subgraph EXTERNES ["SERVICES EXTERNES"]
+        OR["OpenRouter API\ngoogle/gemini-2.5-flash"]
+        EL["ElevenLabs TTS\neleven_turbo_v2_5\n~800 ms"]
+    end
+
+    SR -->|transcript final| CB
+    SR -->|interim text| GHOST
+    GHOST --> CB
+    CB -->|POST message + history + langue| CHAT
+    CB -->|POST text + langue| SPEAK
+    CB -->|POST niss / nom| NISS
+
+    CHAT --> KB
+    CHAT -->|Prompt + history| OR
+    OR -->|reply| CHAT
+    CHAT -->|reply JSON| CB
+
+    SPEAK -->|belgiciserNombres fr only| SPEAK
+    SPEAK -->|xi-api-key + text + model| EL
+    EL -->|audio/mpeg blob| SPEAK
+    SPEAK -->|ArrayBuffer| CB
+
+    NISS --> HAB
+    NISS -->|statut citoyen| CB
+
+    CB -->|blob URL| AUDIO
+    AUDIO -->|canplaythrough → duration| TW
+    AUDIO -->|interim barge-in| SR
+
+    ENV -.->|OPENROUTER_API_KEY\nOPENROUTER_MODEL| CHAT
+    ENV -.->|ELEVENLABS_API_KEY\nELEVENLABS_VOICE_ID| SPEAK
+    ENV -.->|NEXT_PUBLIC_SITE_URL| CHAT
+
+    style NAVIGATEUR fill:#1a1a2e,stroke:#e63946,color:#fff
+    style NEXTJS fill:#16213e,stroke:#4ecdc4,color:#fff
+    style EXTERNES fill:#0f3460,stroke:#f7b731,color:#fff
+
+    style SR fill:#2d6a4f,stroke:#52b788,color:#fff
+    style CB fill:#e63946,stroke:#c1121f,color:#fff
+    style TW fill:#333,stroke:#aaa,color:#fff
+    style AUDIO fill:#333,stroke:#aaa,color:#fff
+    style GHOST fill:#333,stroke:#aaa,color:#fff
+
+    style CHAT fill:#1b4332,stroke:#52b788,color:#fff
+    style SPEAK fill:#1b4332,stroke:#52b788,color:#fff
+    style NISS fill:#1b4332,stroke:#52b788,color:#fff
+    style KB fill:#3a5a40,stroke:#aaa,color:#fff
+    style HAB fill:#3a5a40,stroke:#aaa,color:#fff
+    style ENV fill:#7b2d00,stroke:#f7b731,color:#fff
+
+    style OR fill:#1d3557,stroke:#a8dadc,color:#fff
+    style EL fill:#1d3557,stroke:#a8dadc,color:#fff

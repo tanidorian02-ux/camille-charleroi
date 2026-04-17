@@ -1,0 +1,164 @@
+[
+  {
+    "prenom": "Sophie",
+    "nom": "Dubois",
+    "date_naissance": "12/04/1989",
+    "cp": "6000",
+    "adresse": "Rue de la Paix 14, Charleroi",
+    "statut": "Domicilié",
+    "niss_hash": "5e32ce4e422d0d00c890db77906710e06f79d6eb98bed0630c0e655253a05f55"
+  },
+  {
+    "prenom": "Marc",
+    "nom": "Lambert",
+    "date_naissance": "03/09/1975",
+    "cp": "6001",
+    "adresse": "Avenue Centrale 7, Charleroi",
+    "statut": "Résident secondaire",
+    "niss_hash": "3a97e10333891d9297863443584b7b556802d6efe8e9101b96a328469d4647a5"
+  },
+  {
+    "prenom": "Amina",
+    "nom": "Haddad",
+    "date_naissance": "27/11/2001",
+    "cp": "6010",
+    "adresse": "Clos des Lilas 3, Charleroi",
+    "statut": "Domicilié",
+    "niss_hash": "4748f358b2fb454ddbdc82400956477baf627a786617a2b6c5ac9f293bd691be"
+  },
+  {
+    "prenom": "Jean-Pierre",
+    "nom": "Renard",
+    "date_naissance": "15/06/1968",
+    "cp": "6000",
+    "adresse": "Boulevard Tirou 22, Charleroi",
+    "statut": "Domicilié",
+    "niss_hash": "1476045ab7dbc593d57aea250950743b3ae484f6d0278710cc4604aacc175d19"
+  },
+  {
+    "prenom": "Fatima",
+    "nom": "Benali",
+    "date_naissance": "08/03/1993",
+    "cp": "6020",
+    "adresse": "Rue du Moulin 5, Dampremy",
+    "statut": "Domicilié",
+    "niss_hash": "876a2fb25aa99ca2f52177f052549bdc996ed9523a5c662436900a6ae0ad6fb7"
+  },
+  {
+    "prenom": "Thomas",
+    "nom": "Pirard",
+    "date_naissance": "22/12/1985",
+    "cp": "6030",
+    "adresse": "Chaussée de Bruxelles 88, Marchienne-au-Pont",
+    "statut": "Résident secondaire",
+    "niss_hash": "dc554eb4025e122ff4228a7803a6eca6fb280365ddc0db47926a97ef69681d6c"
+  },
+  {
+    "prenom": "Nathalie",
+    "nom": "Collin",
+    "date_naissance": "30/07/1979",
+    "cp": "6001",
+    "adresse": "Rue des Tanneurs 11, Charleroi",
+    "statut": "Domicilié",
+    "niss_hash": "3be3feb52b32fc96c86f2984b8e9c95e6047700c234ab18f1f0d54b9e034bf29"
+  },
+  {
+    "prenom": "Karim",
+    "nom": "Mansouri",
+    "date_naissance": "14/02/1998",
+    "cp": "6040",
+    "adresse": "Avenue de l'Espérance 33, Jumet",
+    "statut": "Domicilié",
+    "niss_hash": "7efec439db1725dfd3e7da5ef58ae86f3d728b06f666a4549687cd87264a7a9f"
+  },
+  {
+    "prenom": "Isabelle",
+    "nom": "Fontaine",
+    "date_naissance": "05/10/1961",
+    "cp": "6000",
+    "adresse": "Place du Manège 2, Charleroi",
+    "statut": "Domicilié",
+    "niss_hash": "a6080f2829375f9551c28c3800b14c3ea97b7ebb512f7ff8cd16498538d575be"
+  },
+  {
+    "prenom": "Luca",
+    "nom": "Di Martino",
+    "date_naissance": "19/05/2003",
+    "cp": "6010",
+    "adresse": "Rue Emile Buisset 47, Couillet",
+    "statut": "Résident secondaire",
+    "niss_hash": "413e84ab246a341a2434fc2a81bedc46a1878a2a3bbf3bc59c9d433f858b2644"
+  },
+  {
+    "prenom": "Céline",
+    "nom": "Maes",
+    "date_naissance": "11/08/1990",
+    "cp": "6020",
+    "adresse": "Rue de la Station 9, Dampremy",
+    "statut": "Domicilié",
+    "niss_hash": "a29e90fdb7cd29c4f916a404f58f37b86833f3d8bc523f82acab50807d2a7a9d"
+  },
+  {
+    "prenom": "Olivier",
+    "nom": "Dumont",
+    "date_naissance": "28/01/1972",
+    "cp": "6030",
+    "adresse": "Rue Grande 64, Marchienne-au-Pont",
+    "statut": "Domicilié",
+    "niss_hash": "faff02b99200b67bca8ae485b5a0809a17156fe8d1ef2181fbd8f6026e597c02"
+  },
+  {
+    "prenom": "Yasmine",
+    "nom": "El Amrani",
+    "date_naissance": "07/04/1996",
+    "cp": "6040",
+    "adresse": "Cité des Acacias 18, Jumet",
+    "statut": "Domicilié",
+    "niss_hash": "4e6c79d104e7ed7a0a23388795726581778cb5b0837d79d2ce794c1f72df125d"
+  },
+  {
+    "prenom": "Patrick",
+    "nom": "Lecomte",
+    "date_naissance": "23/11/1955",
+    "cp": "6000",
+    "adresse": "Rue de la Montagne 3, Charleroi",
+    "statut": "Résident secondaire",
+    "niss_hash": "f493728d3168207505eca49f49b4337cb123867ac2e10b59df9a255459789e74"
+  },
+  {
+    "prenom": "Aurore",
+    "nom": "Gilles",
+    "date_naissance": "16/09/2000",
+    "cp": "6001",
+    "adresse": "Impasse des Roses 6, Charleroi",
+    "statut": "Domicilié",
+    "niss_hash": "ea2e293e9ebc784e5bff5f6d65fac1469c5f2725ba60e8c4ee8512b2ea571320"
+  },
+  {
+    "prenom": "Hassan",
+    "nom": "Rachidi",
+    "date_naissance": "02/06/1983",
+    "cp": "6010",
+    "adresse": "Rue du Calvaire 29, Couillet",
+    "statut": "Domicilié",
+    "niss_hash": "6050b36fc275601e67ab899b7b41edcf8546243939417803a5c6846d367ef9de"
+  },
+  {
+    "prenom": "Virginie",
+    "nom": "Poncin",
+    "date_naissance": "18/03/1977",
+    "cp": "6020",
+    "adresse": "Square des Bouleaux 12, Dampremy",
+    "statut": "Résident secondaire",
+    "niss_hash": "717e0f786f1d95870ec2d9908f07edf1e56893537fb0e7211e03f598bb522851"
+  },
+  {
+    "prenom": "Alexis",
+    "nom": "Charlier",
+    "date_naissance": "09/12/1991",
+    "cp": "6030",
+    "adresse": "Rue du Commerce 55, Marchienne-au-Pont",
+    "statut": "Domicilié",
+    "niss_hash": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6"
+  }
+]

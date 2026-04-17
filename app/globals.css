@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+
+  /* Brand colors Camille / Charleroi */
+  --color-brand-red:   #d44e7a;
+  --color-brand-black: #1a1020;
+  --color-brand-dark:  #1a1020;
+  --color-brand-mid:   #6b6b7b;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+/* Hero background gradient */
+.hero-bg {
+  background: linear-gradient(135deg, #1a1020 0%, #2d1a3a 50%, #1a1020 100%);
+}
+
+/* Watermark CHARLEROI */
+.hero-watermark {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: clamp(80px, 14vw, 180px);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: white;
+  opacity: 0.03;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Feature card */
+.feature-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  border: 1px solid #f0eef4;
+  border-radius: 1rem;
+  background: #faf9fc;
+}
+
+.feature-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  background: #f0eef4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #866ca0;
+}
+
+/* Service destination card */
+.svc-dest-card {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: 1px solid #f0eef4;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.svc-dest-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  transform: translateY(-2px);
+}
+
+.svc-dest-img {
+  position: relative;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.svc-dest-img svg {
+  width: 56px;
+  height: 56px;
+  opacity: 0.85;
+}
+.svc-dest-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.svc-dest-info {
+  padding: 1rem;
+}
+.svc-dest-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* Step card */
+.step-card {
+  padding: 1.5rem;
+  border: 1px solid #f0eef4;
+  border-radius: 1rem;
+  background: #faf9fc;
+}
+.step-num {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: #1a1020;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Chat bubble */
+.bubble-ai {
+  background: rgba(255,255,255,0.10);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.80);
+  font-weight: 300;
+  line-height: 1.6;
+  border-radius: 0 0.75rem 0.75rem 0.75rem;
+  max-width: 18rem;
+}
+
+/* Nav link */
+.nav-link {
+  transition: color 0.15s;
+}
+.nav-link:hover {
+  color: #d44e7a;
+}
+
+/* Rose line decorator */
+.rose-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.rose-line::before {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: #d44e7a;
+  border-radius: 2px;
+}
+
+/* Scrollbar du transcript Camille */
+.chat-transcript::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-transcript::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-transcript::-webkit-scrollbar-thumb {
+  background: rgba(212, 78, 122, 0.35);
+  border-radius: 999px;
+}
+.chat-transcript::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 78, 122, 0.65);
+}
+/* Firefox */
+.chat-transcript {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 78, 122, 0.35) transparent;
+}
+
+/* Wave bar animation */
+@keyframes wave-pulse {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.4); }
+}
+.wave-bar {
+  transition: opacity 0.3s;
+}
+.wave-bar.animate {
+  animation: wave-pulse 0.8s ease-in-out infinite;
+}
+.wave-bar:nth-child(1) { animation-delay: 0s; }
+.wave-bar:nth-child(2) { animation-delay: 0.1s; }
+.wave-bar:nth-child(3) { animation-delay: 0.2s; }
+.wave-bar:nth-child(4) { animation-delay: 0.15s; }
+.wave-bar:nth-child(5) { animation-delay: 0.05s; }
+.wave-bar:nth-child(6) { animation-delay: 0.1s; }
+.wave-bar:nth-child(7) { animation-delay: 0s; }
