@@ -36,16 +36,19 @@ const DIRE: Record<string, string> = {
   '98': 'nonante-huit', '99': 'nonante-neuf',
 }
 
-// Lit un groupe de chiffres (2 ou 3 chiffres) en toutes lettres belges
-function lireGroupe(g: string): string {
-  if (g.length === 2) return DIRE[g] ?? g
-  if (g.length === 3) return `zéro-${DIRE[g.slice(1)] ?? g.slice(1)}`   // "071" → "zéro-septante-et-un"
-  if (g.length === 4) return `${DIRE[g.slice(0, 2)] ?? g.slice(0, 2)}-${DIRE[g.slice(2)] ?? g.slice(2)}`
-  return g.split('').join('-')
+// Épelle chaque chiffre individuellement — évite toute confusion ElevenLabs
+// entre les nombres belges (septante) et français (soixante-dix)
+// Ex: "071" → "zéro-sept-un" | "86" → "huit-six" | "00" → "zéro-zéro"
+const CHIFFRE: Record<string, string> = {
+  '0': 'zéro', '1': 'un', '2': 'deux', '3': 'trois', '4': 'quatre',
+  '5': 'cinq', '6': 'six', '7': 'sept', '8': 'huit', '9': 'neuf',
 }
 
-// Convertit un numéro belge en version épelée par groupes d'origine
-// Ex: "071 86 00 00" → "zéro-septante-et-un, quatre-vingt-six, zéro-zéro, zéro-zéro"
+function lireGroupe(g: string): string {
+  return g.split('').map(c => CHIFFRE[c] ?? c).join('-')
+}
+
+// "071 86 00 00" → "zéro-sept-un, huit-six, zéro-zéro, zéro-zéro"
 function formatNumeroTelephone(num: string): string {
   const normalise = num.replace(/^\+32\s?/, '0')
   const groupes   = normalise.split(/[\s./]+/).filter(Boolean)
