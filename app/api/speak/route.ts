@@ -6,50 +6,50 @@ const FALLBACK_VOICE = 'EXAVITQu4vr4xnSDxMaL'
 // ── Nettoyage TTS ─────────────────────────────────────────────────────────────
 // Supprime les symboles markdown et caractères spéciaux qui perturbent la prosodie.
 // Ex: "**Urbanisme** : voir *ici*" → "Urbanisme : voir ici"
-// Convertit un numéro belge en version épelée lisible par ElevenLabs
-// Ex: "071 86 00 00" → "zéro septante et un, huitante-six, zéro zéro, zéro zéro"
-// On utilise une lecture par paires de chiffres, naturelle en Belgique
+const DIRE: Record<string, string> = {
+  '00': 'zéro-zéro', '01': 'zéro-un', '02': 'zéro-deux', '03': 'zéro-trois',
+  '04': 'zéro-quatre', '05': 'zéro-cinq', '06': 'zéro-six', '07': 'zéro-sept',
+  '08': 'zéro-huit', '09': 'zéro-neuf', '10': 'dix', '11': 'onze',
+  '12': 'douze', '13': 'treize', '14': 'quatorze', '15': 'quinze',
+  '16': 'seize', '17': 'dix-sept', '18': 'dix-huit', '19': 'dix-neuf',
+  '20': 'vingt', '21': 'vingt-et-un', '22': 'vingt-deux', '23': 'vingt-trois',
+  '24': 'vingt-quatre', '25': 'vingt-cinq', '26': 'vingt-six', '27': 'vingt-sept',
+  '28': 'vingt-huit', '29': 'vingt-neuf', '30': 'trente', '31': 'trente-et-un',
+  '32': 'trente-deux', '33': 'trente-trois', '34': 'trente-quatre', '35': 'trente-cinq',
+  '36': 'trente-six', '37': 'trente-sept', '38': 'trente-huit', '39': 'trente-neuf',
+  '40': 'quarante', '41': 'quarante-et-un', '42': 'quarante-deux', '43': 'quarante-trois',
+  '44': 'quarante-quatre', '45': 'quarante-cinq', '46': 'quarante-six', '47': 'quarante-sept',
+  '48': 'quarante-huit', '49': 'quarante-neuf', '50': 'cinquante', '51': 'cinquante-et-un',
+  '52': 'cinquante-deux', '53': 'cinquante-trois', '54': 'cinquante-quatre', '55': 'cinquante-cinq',
+  '56': 'cinquante-six', '57': 'cinquante-sept', '58': 'cinquante-huit', '59': 'cinquante-neuf',
+  '60': 'soixante', '61': 'soixante-et-un', '62': 'soixante-deux', '63': 'soixante-trois',
+  '64': 'soixante-quatre', '65': 'soixante-cinq', '66': 'soixante-six', '67': 'soixante-sept',
+  '68': 'soixante-huit', '69': 'soixante-neuf',
+  '70': 'septante', '71': 'septante-et-un', '72': 'septante-deux', '73': 'septante-trois',
+  '74': 'septante-quatre', '75': 'septante-cinq', '76': 'septante-six', '77': 'septante-sept',
+  '78': 'septante-huit', '79': 'septante-neuf',
+  '80': 'quatre-vingts', '81': 'quatre-vingt-un', '82': 'quatre-vingt-deux', '83': 'quatre-vingt-trois',
+  '84': 'quatre-vingt-quatre', '85': 'quatre-vingt-cinq', '86': 'quatre-vingt-six', '87': 'quatre-vingt-sept',
+  '88': 'quatre-vingt-huit', '89': 'quatre-vingt-neuf',
+  '90': 'nonante', '91': 'nonante-et-un', '92': 'nonante-deux', '93': 'nonante-trois',
+  '94': 'nonante-quatre', '95': 'nonante-cinq', '96': 'nonante-six', '97': 'nonante-sept',
+  '98': 'nonante-huit', '99': 'nonante-neuf',
+}
+
+// Lit un groupe de chiffres (2 ou 3 chiffres) en toutes lettres belges
+function lireGroupe(g: string): string {
+  if (g.length === 2) return DIRE[g] ?? g
+  if (g.length === 3) return `zéro-${DIRE[g.slice(1)] ?? g.slice(1)}`   // "071" → "zéro-septante-et-un"
+  if (g.length === 4) return `${DIRE[g.slice(0, 2)] ?? g.slice(0, 2)}-${DIRE[g.slice(2)] ?? g.slice(2)}`
+  return g.split('').join('-')
+}
+
+// Convertit un numéro belge en version épelée par groupes d'origine
+// Ex: "071 86 00 00" → "zéro-septante-et-un, quatre-vingt-six, zéro-zéro, zéro-zéro"
 function formatNumeroTelephone(num: string): string {
-  const chiffres = num.replace(/\D/g, '')
-  if (chiffres.length < 6) return num
-
-  // Découpe en paires depuis la droite pour respecter le rythme belge
-  const paires: string[] = []
-  for (let i = 0; i < chiffres.length; i += 2) {
-    paires.push(chiffres.slice(i, i + 2))
-  }
-
-  const dire: Record<string, string> = {
-    '00': 'zéro zéro', '01': 'zéro un', '02': 'zéro deux', '03': 'zéro trois',
-    '04': 'zéro quatre', '05': 'zéro cinq', '06': 'zéro six', '07': 'zéro sept',
-    '08': 'zéro huit', '09': 'zéro neuf', '10': 'dix', '11': 'onze',
-    '12': 'douze', '13': 'treize', '14': 'quatorze', '15': 'quinze',
-    '16': 'seize', '17': 'dix-sept', '18': 'dix-huit', '19': 'dix-neuf',
-    '20': 'vingt', '21': 'vingt et un', '22': 'vingt-deux', '23': 'vingt-trois',
-    '24': 'vingt-quatre', '25': 'vingt-cinq', '26': 'vingt-six', '27': 'vingt-sept',
-    '28': 'vingt-huit', '29': 'vingt-neuf', '30': 'trente', '31': 'trente et un',
-    '32': 'trente-deux', '33': 'trente-trois', '34': 'trente-quatre', '35': 'trente-cinq',
-    '36': 'trente-six', '37': 'trente-sept', '38': 'trente-huit', '39': 'trente-neuf',
-    '40': 'quarante', '41': 'quarante et un', '42': 'quarante-deux', '43': 'quarante-trois',
-    '44': 'quarante-quatre', '45': 'quarante-cinq', '46': 'quarante-six', '47': 'quarante-sept',
-    '48': 'quarante-huit', '49': 'quarante-neuf', '50': 'cinquante', '51': 'cinquante et un',
-    '52': 'cinquante-deux', '53': 'cinquante-trois', '54': 'cinquante-quatre', '55': 'cinquante-cinq',
-    '56': 'cinquante-six', '57': 'cinquante-sept', '58': 'cinquante-huit', '59': 'cinquante-neuf',
-    '60': 'soixante', '61': 'soixante et un', '62': 'soixante-deux', '63': 'soixante-trois',
-    '64': 'soixante-quatre', '65': 'soixante-cinq', '66': 'soixante-six', '67': 'soixante-sept',
-    '68': 'soixante-huit', '69': 'soixante-neuf',
-    '70': 'septante', '71': 'septante et un', '72': 'septante-deux', '73': 'septante-trois',
-    '74': 'septante-quatre', '75': 'septante-cinq', '76': 'septante-six', '77': 'septante-sept',
-    '78': 'septante-huit', '79': 'septante-neuf',
-    '80': 'quatre-vingts', '81': 'quatre-vingt-un', '82': 'quatre-vingt-deux', '83': 'quatre-vingt-trois',
-    '84': 'quatre-vingt-quatre', '85': 'quatre-vingt-cinq', '86': 'quatre-vingt-six', '87': 'quatre-vingt-sept',
-    '88': 'quatre-vingt-huit', '89': 'quatre-vingt-neuf',
-    '90': 'nonante', '91': 'nonante et un', '92': 'nonante-deux', '93': 'nonante-trois',
-    '94': 'nonante-quatre', '95': 'nonante-cinq', '96': 'nonante-six', '97': 'nonante-sept',
-    '98': 'nonante-huit', '99': 'nonante-neuf',
-  }
-
-  return paires.map(p => dire[p] ?? p).join(', ')
+  const normalise = num.replace(/^\+32\s?/, '0')
+  const groupes   = normalise.split(/[\s./]+/).filter(Boolean)
+  return groupes.map(lireGroupe).join(', ')
 }
 
 function nettoyerTTS(texte: string): string {
@@ -85,8 +85,8 @@ function belgiciserNombres(texte: string): string {
   t = t
     .replace(/\bsoixante[\s-]dix\b/gi,               'septante')
     // 71 : "soixante et onze" (avec "et") OU "soixante-onze" (sans "et", variante LLM)
-    .replace(/\bsoixante[\s-]et[\s-]onze\b/gi,       'septante et un')
-    .replace(/\bsoixante[\s-]onze\b/gi,              'septante et un')
+    .replace(/\bsoixante[\s-]et[\s-]onze\b/gi,       'septante-et-un')
+    .replace(/\bsoixante[\s-]onze\b/gi,              'septante-et-un')
     .replace(/\bsoixante[\s-]douze\b/gi,             'septante-deux')
     .replace(/\bsoixante[\s-]treize\b/gi,            'septante-trois')
     .replace(/\bsoixante[\s-]quatorze\b/gi,          'septante-quatre')
@@ -99,7 +99,7 @@ function belgiciserNombres(texte: string): string {
     // 90 : "quatre-vingt-dix" (sans "et")
     .replace(/\bquatre[\s-]vingt[\s-]dix\b/gi,       'nonante')
     // 91 : "quatre-vingt-onze" (sans "et" — contrairement à 71, 91 n'a jamais de "et")
-    .replace(/\bquatre[\s-]vingt[\s-](?:et[\s-])?onze\b/gi, 'nonante et un')
+    .replace(/\bquatre[\s-]vingt[\s-](?:et[\s-])?onze\b/gi, 'nonante-et-un')
     .replace(/\bquatre[\s-]vingt[\s-]douze\b/gi,     'nonante-deux')
     .replace(/\bquatre[\s-]vingt[\s-]treize\b/gi,    'nonante-trois')
     .replace(/\bquatre[\s-]vingt[\s-]quatorze\b/gi,  'nonante-quatre')
