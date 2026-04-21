@@ -111,7 +111,16 @@ export function useVoiceInput({
     const analyser = ctx.createAnalyser()
     analyser.fftSize               = 256
     analyser.smoothingTimeConstant = 0.8
-    source.connect(analyser)
+
+    // High-pass filter: cuts low-frequency vibrations (footsteps, table taps < 200Hz)
+    // while preserving speech (fundamental starts at ~85Hz but harmonics from 200Hz+).
+    const highpass = ctx.createBiquadFilter()
+    highpass.type            = 'highpass'
+    highpass.frequency.value = 200
+    highpass.Q.value         = 0.7
+    source.connect(highpass)
+    highpass.connect(analyser)
+
     audioCtxRef.current = ctx
     analyserRef.current = analyser
 
