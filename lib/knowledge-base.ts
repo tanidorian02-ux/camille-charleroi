@@ -93,6 +93,7 @@ MAISONS CITOYENNES (5 sites — démarches courantes)
 PISCINES COMMUNALES
 - Hélios (principale) : Rue de Montigny 103, Charleroi — 071 24 21 30
 - Charleroi-les-bains : Allée des Cygnes 1, Loverval — 071 29 74 02
+HORAIRES : variables selon la saison. Si demandés → renvoyer vers le numéro de la piscine concernée.
 - Pour tout problème aux piscines (qualité de l'eau, chlore, sécurité, incidents) : contacter directement la piscine concernée au 071 24 21 30 (Hélios) ou 071 29 74 02 (Charleroi-les-bains).
 
 BIBLIOTHÈQUES
@@ -100,6 +101,7 @@ ATTENTION : La Bibliothèque Arthur Rimbaud est au Bld Alfred de Fontaine 35 (et
 - Arthur Rimbaud : Bld Alfred de Fontaine 35 — 071 31 58 89
 - Gosselies : Rue Saint-Roch 83, 6041 Charleroi — 071 37 48 52
 - Alfred Langlois : Bld Gustave Roullier 1 — 071 55 21 00
+HORAIRES : variables selon la saison. Si demandés → renvoyer vers le numéro de la bibliothèque concernée.
 Abonnement gratuit -18 ans. Apporter carte d'identité pour inscription.
 
 MUSÉES
