@@ -240,6 +240,7 @@ export function useVoiceInput({
 
     recognition.onresult = (event: any) => {
       let interim = ''
+      let addedFinal = false
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const r = event.results[i]
@@ -249,6 +250,7 @@ export function useVoiceInput({
           if (!conf || conf >= CONFIDENCE_THRESHOLD) {
             const corrected = correctSTT(r[0].transcript.trim())
             accTranscriptRef.current += (accTranscriptRef.current ? ' ' : '') + corrected
+            addedFinal = true
           }
         } else {
           interim += r[0].transcript
@@ -258,7 +260,10 @@ export function useVoiceInput({
       const preview = [accTranscriptRef.current, interim].filter(Boolean).join(' ')
       setInterimText(preview)
 
-      if (accTranscriptRef.current || interim) armSilenceTimer()
+      // Only reset the silence timer when there is actual new speech content —
+      // not just because accumulated text exists. Prevents taps/noises from
+      // restarting the timer after the user has finished speaking.
+      if (addedFinal || interim.trim()) armSilenceTimer()
     }
 
     try { recognition.start() } catch {}
