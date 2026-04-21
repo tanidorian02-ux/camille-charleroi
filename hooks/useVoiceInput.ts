@@ -42,15 +42,16 @@ export function useVoiceInput({
   const [vadActive, setVadActive]     = useState(false)
   const [interimText, setInterimText] = useState('')
 
-  const isListeningRef   = useRef(false)
-  const vadActiveRef     = useRef(false)
-  const audioCtxRef      = useRef<AudioContext | null>(null)
-  const streamRef        = useRef<MediaStream | null>(null)
-  const rmsRafRef        = useRef<number | null>(null)
-  const silenceTimerRef  = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const accTranscriptRef = useRef('')
-  const recognitionRef   = useRef<any>(null)
-  const userMicOnRef     = useRef(false)
+  const isListeningRef    = useRef(false)
+  const vadActiveRef      = useRef(false)
+  const audioCtxRef       = useRef<AudioContext | null>(null)
+  const streamRef         = useRef<MediaStream | null>(null)
+  const rmsRafRef         = useRef<number | null>(null)
+  const silenceTimerRef   = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const accTranscriptRef  = useRef('')
+  const recognitionRef    = useRef<any>(null)
+  const userMicOnRef      = useRef(false)
+  const calibratedRmsRef  = useRef(RMS_THRESHOLD)
 
   function setListening(val: boolean) {
     isListeningRef.current = val
@@ -113,7 +114,15 @@ export function useVoiceInput({
     audioCtxRef.current = ctx
     analyserRef.current = analyser
 
+    // Reset to default so calibration always runs fresh on each mic session.
+    calibratedRmsRef.current = RMS_THRESHOLD
+
     const data = new Uint8Array(analyser.frequencyBinCount)
+
+    // Collect ambient RMS for 1s to set a context-aware VAD threshold.
+    let calibDone = false
+    const ambientSamples: number[] = []
+    const calibDeadline = performance.now() + 1000
 
     function tick() {
       if (!analyserRef.current) return
@@ -126,10 +135,20 @@ export function useVoiceInput({
       }
       const rms = Math.sqrt(sum / data.length)
 
-      // During playback use the calibrated echo RMS as threshold; otherwise static threshold.
+      if (!calibDone) {
+        if (performance.now() < calibDeadline) {
+          ambientSamples.push(rms)
+        } else if (ambientSamples.length > 0) {
+          const mean = ambientSamples.reduce((a, b) => a + b, 0) / ambientSamples.length
+          calibratedRmsRef.current = Math.max(0.08, Math.min(0.20, mean * 2.5))
+          calibDone = true
+        }
+      }
+
+      // During playback use the echo-calibrated threshold; otherwise use ambient-calibrated threshold.
       const dynamicThreshold = (audioRef.current && baselineEchoRmsRef.current > 0)
         ? baselineEchoRmsRef.current
-        : RMS_THRESHOLD
+        : calibratedRmsRef.current
 
       const active = rms > dynamicThreshold
 

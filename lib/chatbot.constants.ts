@@ -37,7 +37,7 @@ export const RMS_THRESHOLD   = 0.12
 export const MIN_WORDS       = 3
 export const FILLER_RE       = /^(euh+|ah+|mmm+|hm+|hein|bah|ben|ouais|voilà?|okay|ok)\s*[,;.!?]*$/i
 
-export const BARGE_IN_MUTE_MS       = 1500
+export const BARGE_IN_MUTE_MS       = 700
 export const BARGE_IN_BOOST         = 2.0
 export const BARGE_IN_MAX_THRESHOLD = 0.28
 export const BARGE_IN_MIN_FRAMES    = 12
