@@ -47,7 +47,7 @@ Tel: 0800 24 063 (gratuit) | Rue Appaumée 69, 6043 Ransart | Lun-Ven 8h30-12h e
 - Calendrier collecte poubelles : charleroi.be rubrique "Mes déchets" ou 0800 24 063.
 - Dépôt sauvage : formulaire charleroi.be ou 0800 24 063. Enlèvement sous quelques jours.
 - Permis abattage arbre : souvent requis, appeler 0800 24 063. Arbre dangereux : urgence au même numéro.
-- Recypark principal : Rue de Gosselies. Second à Marchienne-au-Pont. Lun-Ven 8h-17h, Sam 8h-13h. Gratuit résidents.
+- Recypark : Rue de Marcinelle 26 — 0800 94 234 | Lun-Ven 8h-17h, Sam 8h-13h. Gratuit résidents.
 
 CPAS
 Tel: 071 23 30 23 | Boulevard Joseph II 13, 6000 Charleroi | Lun-Ven 8h30-16h (RDV conseillé)
@@ -103,9 +103,9 @@ ATTENTION : La Bibliothèque Arthur Rimbaud est au Bld Alfred de Fontaine 35 (et
 Abonnement gratuit -18 ans. Apporter carte d'identité pour inscription.
 
 MUSÉES
-- Beaux-Arts : Bld Pierre Mayence 67 — 071 86 11 34 | Mar-Ven 9h-17h, Sam-Dim 10h-18h
-- Musée du Verre : Rue du Cazier 80, Marcinelle — 071 86 22 65
-- Musée de la Photographie : Avenue Paul Pastur 11, Charleroi
+- Beaux-Arts : Bld Pierre Mayence 67 — 071 86 11 34 | Mar-Ven 9h-17h, Sam-Dim 10h-18h | Fermé lundi
+- Musée du Verre : Rue du Cazier 80, Marcinelle — 071 86 22 65 | Mar-Ven 9h-17h, Sam-Dim 10h-18h | Fermé lundi
+- Musée de la Photographie : Avenue Paul Pastur 11, Charleroi | Mar-Ven 9h-17h, Sam-Dim 10h-18h | Fermé lundi
 
 HÔPITAUX
 - CHU Marie Curie : Chaussée de Bruxelles 140, Lodelinsart — 071 92 13 11 (urgences 24h/7j)
@@ -119,7 +119,12 @@ CINÉMAS
 - Quai 10 (art et essai) : Quai Arthur Rimbaud 10 — 071 31 71 47
 
 COMPLEXES SPORTIFS
-- Pôle Sport Pour Tous : Rue de Mons 80, Marchienne-au-Pont — 0497 60 58 74
+- Pôle Sport Pour Tous : Rue de Mons 80A, 6030 Marchienne-au-Pont — 071 23 10 90
+- COS 1 & COS 2 (Garenne) : Rue des Olympiades 2, 6000 Charleroi — 071 86 24 53 | Lun-Ven 8h-17h
+- Centre de Loisirs de Lodelinsart : Rue du Chemin Vert 125B, 6042 Lodelinsart — 071 86 24 53 | Lun-Ven 8h-17h
+- Hall omnisports Docherie : Rue de Jumet 324, 6030 Marchienne-au-Pont — 071 86 24 53 | Lun-Ven 8h-17h
+- Centre Sportif L'Asie : Rue de L'Asie 4, 6001 Marcinelle — 071 86 40 40
+- Centre Sportif Fourcault : Rue des Français 146, 6020 Dampremy — 071 86 40 40
 - Stade du Pays de Charleroi : Bld Zoé Drion 19 — 071 86 22 00
 - Chèque Sport : réduction 100€/an pour jeunes et aînés (071 86 22 22)
 
