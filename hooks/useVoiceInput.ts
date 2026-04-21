@@ -260,10 +260,12 @@ export function useVoiceInput({
       const preview = [accTranscriptRef.current, interim].filter(Boolean).join(' ')
       setInterimText(preview)
 
-      // Only reset the silence timer when there is actual new speech content —
-      // not just because accumulated text exists. Prevents taps/noises from
-      // restarting the timer after the user has finished speaking.
-      if (addedFinal || interim.trim()) armSilenceTimer()
+      // Reset timer only when new speech content is confirmed by sustained VAD.
+      // Taps produce 1-3 VAD frames and may generate STT noise — both checks
+      // must pass to avoid restarting the timer on transient sounds.
+      if (addedFinal || (interim.trim() && bargeInFrameCountRef.current >= SUSTAINED_VAD_FRAMES)) {
+        armSilenceTimer()
+      }
     }
 
     try { recognition.start() } catch {}
