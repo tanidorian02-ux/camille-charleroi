@@ -2,8 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import type { Language } from '@/lib/types'
 import { SYSTEM_PROMPT } from '@/lib/system-prompts'
 import { TOOLS, executerOutil } from '@/lib/chat-tools'
+import { STATUS_TOOL } from '@/lib/chatbot.constants'
 
 const OR_URL = 'https://openrouter.ai/api/v1/chat/completions'
+
+interface ToolCallAccum { id: string; name: string; arguments: string }
 
 function buildRequest(
   apiKey: string,
@@ -29,7 +32,6 @@ function buildRequest(
   }
 }
 
-// Parses an OpenRouter SSE stream into JSON objects.
 async function* parseSSE(body: ReadableStream<Uint8Array>): AsyncGenerator<Record<string, unknown>> {
   const reader  = body.getReader()
   const decoder = new TextDecoder()
@@ -152,8 +154,6 @@ export async function POST(req: NextRequest) {
           return
         }
 
-        // Accumulate first stream — detect whether it's a text response or a tool call.
-        interface ToolCallAccum { id: string; name: string; arguments: string }
         let toolCall:    ToolCallAccum | null = null
         let finishReason: string | null       = null
 
@@ -173,14 +173,8 @@ export async function POST(req: NextRequest) {
           }
         }
 
-        // Tool call branch — execute tool then stream second LLM call.
         if (toolCall && finishReason === 'tool_calls') {
           console.log('[/api/chat] stream tool_call:', toolCall.name)
-          const STATUS_TOOL: Record<string, string> = {
-            fr: 'Je vérifie vos informations…',
-            nl: 'Ik controleer uw gegevens…',
-            en: 'Let me check your information…',
-          }
           send({ t: 'status', c: STATUS_TOOL[langue] ?? STATUS_TOOL.fr })
           const toolResult  = executerOutil(toolCall.name, toolCall.arguments)
           const assistantMsg = {

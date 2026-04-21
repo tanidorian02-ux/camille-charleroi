@@ -29,6 +29,12 @@ export const SUGGESTIONS: Record<Language, Array<{ label: string; question: stri
 
 export const LANG_SPEECH: Record<Language, string> = { fr: 'fr-BE', nl: 'nl-BE', en: 'en-US' }
 
+export const STATUS_TOOL: Record<Language, string> = {
+  fr: 'Je vérifie vos informations…',
+  nl: 'Ik controleer uw gegevens…',
+  en: 'Let me check your information…',
+}
+
 export const CONFIDENCE_THRESHOLD = 0.30
 export const MAX_HISTORY          = 6
 

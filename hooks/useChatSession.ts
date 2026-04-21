@@ -2,6 +2,11 @@ import { useRef, useState } from 'react'
 import type { Message, Language } from '@/lib/types'
 import { WELCOME, MAX_HISTORY, type Turn } from '@/lib/chatbot.constants'
 
+const RE_ACCENTS   = /[̀-ͯ]/g
+const RE_PUNCT     = /[^\w\s]/g
+const RE_STOPWORDS = /\b(je|me|ma|mon|mes|un|une|des|le|la|les|de|du|en|et|ou|est|pour|comment|puis|veux|voudrais|peux|peut|bien|alors|donc|svp|sil vous plait)\b/g
+const RE_SPACES    = /\s+/g
+
 interface UseChatSessionParams {
   langue:                Language
   isProcessingRef:       React.MutableRefObject<boolean>
@@ -66,10 +71,10 @@ export function useChatSession({
   function normalizeForCache(text: string): string {
     return text
       .toLowerCase()
-      .normalize('NFD').replace(/[̀-ͯ]/g, '')
-      .replace(/[^\w\s]/g, ' ')
-      .replace(/\b(je|me|ma|mon|mes|un|une|des|le|la|les|de|du|en|et|ou|est|pour|comment|puis|veux|voudrais|peux|peut|bien|alors|donc|svp|sil vous plait)\b/g, ' ')
-      .replace(/\s+/g, ' ')
+      .normalize('NFD').replace(RE_ACCENTS, '')
+      .replace(RE_PUNCT, ' ')
+      .replace(RE_STOPWORDS, ' ')
+      .replace(RE_SPACES, ' ')
       .trim()
   }
 
