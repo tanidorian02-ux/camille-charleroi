@@ -98,7 +98,7 @@ PISCINES COMMUNALES
 BIBLIOTHÈQUES
 ATTENTION : La Bibliothèque Arthur Rimbaud est au Bld Alfred de Fontaine 35 (et NON Bld Mayence 67).
 - Arthur Rimbaud : Bld Alfred de Fontaine 35 — 071 31 58 89
-- Gosselies : Rue de l'Observatoire 2 — 071 86 63 51
+- Gosselies : Rue Saint-Roch 83, 6041 Charleroi — 071 37 48 52
 - Alfred Langlois : Bld Gustave Roullier 1 — 071 55 21 00
 Abonnement gratuit -18 ans. Apporter carte d'identité pour inscription.
 
