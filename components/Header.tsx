@@ -4,10 +4,10 @@ import { useState } from 'react'
 
 const CharleroisLogo = () => (
   <svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" fill="#866ca0" width="100%" height="100%">
-    <polygon points="4,38 22,3 40,38"/>
-    <polygon points="30,38 50,1 70,38"/>
-    <polygon points="60,38 78,3 96,38"/>
-    <path d="M80 57 A46 46 0 1 0 80 127 L67 113 A27 27 0 1 1 67 71 Z"/>
+    <polygon points="4,35 18,3 32,35"/>
+    <polygon points="36,35 50,3 64,35"/>
+    <polygon points="68,35 82,3 96,35"/>
+    <path d="M 89.2,79 A 42,42 0 1 0 89.2,109 L 70,109 A 25,25 0 1 1 70,79 Z"/>
   </svg>
 )
 
