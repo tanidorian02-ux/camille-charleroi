@@ -47,6 +47,7 @@ export const BARGE_IN_MUTE_MS       = 700
 export const BARGE_IN_BOOST         = 2.0
 export const BARGE_IN_MAX_THRESHOLD = 0.28
 export const BARGE_IN_MIN_FRAMES    = 12
+export const SUSTAINED_VAD_FRAMES   = 6
 
 export const STT_CORRECTIONS: Array<[RegExp, string]> = [
   [/\bbourg\s*ma[iî]tr[ae]?\b/gi,   'bourgmestre'],

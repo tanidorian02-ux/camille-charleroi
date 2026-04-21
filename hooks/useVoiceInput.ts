@@ -5,6 +5,7 @@ import {
   CONFIDENCE_THRESHOLD,
   RMS_THRESHOLD,
   BARGE_IN_MIN_FRAMES,
+  SUSTAINED_VAD_FRAMES,
   FILLER_RE,
   MIN_WORDS,
   SILENCE_TIMEOUT,
@@ -160,8 +161,9 @@ export function useVoiceInput({
       if (active && !bargeInMutedRef.current) {
         bargeInFrameCountRef.current++
 
-        // Breathing window: voice resuming → reset silence timer.
-        if (silenceTimerRef.current && accTranscriptRef.current.trim()) {
+        // Only reset silence timer if voice is sustained — ignores transient taps/knocks.
+        if (bargeInFrameCountRef.current >= SUSTAINED_VAD_FRAMES &&
+            silenceTimerRef.current && accTranscriptRef.current.trim()) {
           clearTimeout(silenceTimerRef.current)
           silenceTimerRef.current = null
           armSilenceTimer()
